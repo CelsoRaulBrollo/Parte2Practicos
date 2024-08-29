@@ -60,9 +60,36 @@ namespace TP5
             }
         }
 
-        private void dtgvCliente_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        private void dtgvCliente_CellClick_1(object sender, DataGridViewCellEventArgs e)
         {
+            n = e.RowIndex;
 
+            if (n != -1)
+            {
+                string dato = (string)dtgvCliente.Rows[n].Cells[4].Value;
+                string cliente = (string)dtgvCliente.Rows[n].Cells[0].Value + " " + (string)dtgvCliente.Rows[n].Cells[1].Value;
+                if (!string.IsNullOrEmpty(dato) && e.ColumnIndex == 4)
+                {
+                    DialogResult ask = MessageBox.Show("Desea eliminar al Cliente: " + cliente, "Confirmar Eliminación", MessageBoxButtons.YesNo, MessageBoxIcon.Warning, MessageBoxDefaultButton.Button2);
+                    if (ask == DialogResult.Yes)
+                    {
+                        dtgvCliente.Rows.RemoveAt(n);
+                        limpiar();
+                    }
+
+                }
+                if (!string.IsNullOrEmpty(dato) && e.ColumnIndex != 4)
+                {
+                    TBApellido.Text = dtgvCliente.Rows[n].Cells[0].Value.ToString();
+                    TBNombre.Text = dtgvCliente.Rows[n].Cells[1].Value.ToString();
+                    dateTimePicker1.Value = Convert.ToDateTime(dtgvCliente.Rows[n].Cells[2].Value.ToString());
+                    if (dtgvCliente.Rows[n].Cells[3].Value.ToString() == "Hombre") RDBHombre.Checked = true;
+                    else RDBMujer.Checked = true;
+                    TBSaldo.Text = dtgvCliente.Rows[n].Cells[5].Value.ToString();
+                    pictureBox1.Image = Image.FromFile(dtgvCliente.Rows[n].Cells[7].Value.ToString());
+                    TBFoto.Text = dtgvCliente.Rows[n].Cells[7].Value.ToString();
+                }
+            }
         }
 
         private void BTAgregar_Click(object sender, EventArgs e)
@@ -139,6 +166,11 @@ namespace TP5
             TBSaldo.Clear();
             TBFoto.Clear();
             pictureBox1.Image = TP5.Properties.Resources.avatar2;
+        }
+
+        private void TBNombre_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

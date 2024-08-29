@@ -239,6 +239,7 @@
             this.TBNombre.Name = "TBNombre";
             this.TBNombre.Size = new System.Drawing.Size(268, 20);
             this.TBNombre.TabIndex = 0;
+            this.TBNombre.TextChanged += new System.EventHandler(this.TBNombre_TextChanged);
             // 
             // pictureBox1
             // 
@@ -277,7 +278,7 @@
             this.dtgvCliente.RowTemplate.Height = 50;
             this.dtgvCliente.Size = new System.Drawing.Size(977, 187);
             this.dtgvCliente.TabIndex = 3;
-            this.dtgvCliente.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgvCliente_CellContentClick_1);
+            this.dtgvCliente.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dtgvCliente_CellClick_1);
             // 
             // Apellido
             // 
