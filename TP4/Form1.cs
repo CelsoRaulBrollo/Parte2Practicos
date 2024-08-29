@@ -109,5 +109,48 @@ namespace TP4
         {
             return (n % 2 != 0);
         }
+
+        private void BTPrimos_Click(object sender, EventArgs e)
+        {
+            if (LBLista.Items.Count == 0)
+            {
+                MessageBox.Show("Lista de números vacia!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                LBLista.Items.Clear();
+                desde = Int16.Parse(TBDesde.Text);
+                hasta = Int16.Parse(TBHasta.Text);
+                int total = 0;
+                int primos = 0;
+                while (desde <= hasta)
+                {
+                    if (esPrimo(desde))
+                    {
+                        LBLista.Items.Add(desde);
+                        primos++;
+                    }
+                    desde++;
+                    total++;
+                }
+            }
+        }
+
+        public bool esPrimo(Int16 n)
+        {
+            if (n < 2)
+            {
+                return false;
+            }
+
+            for (int i = 2; i <= Math.Sqrt(n); i++)
+            {
+                if (n % i == 0)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
     }
 }

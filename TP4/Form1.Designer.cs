@@ -37,12 +37,13 @@
             this.LDesde = new System.Windows.Forms.Label();
             this.BTPares = new System.Windows.Forms.Button();
             this.BTImpares = new System.Windows.Forms.Button();
+            this.BTPrimos = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(489, 58);
+            this.label1.Location = new System.Drawing.Point(436, 75);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(89, 13);
             this.label1.TabIndex = 41;
@@ -50,7 +51,7 @@
             // 
             // BFuncion
             // 
-            this.BFuncion.Location = new System.Drawing.Point(269, 89);
+            this.BFuncion.Location = new System.Drawing.Point(123, 178);
             this.BFuncion.Name = "BFuncion";
             this.BFuncion.Size = new System.Drawing.Size(103, 23);
             this.BFuncion.TabIndex = 40;
@@ -61,7 +62,7 @@
             // LBLista
             // 
             this.LBLista.FormattingEnabled = true;
-            this.LBLista.Location = new System.Drawing.Point(408, 89);
+            this.LBLista.Location = new System.Drawing.Point(355, 119);
             this.LBLista.Name = "LBLista";
             this.LBLista.Size = new System.Drawing.Size(256, 212);
             this.LBLista.TabIndex = 39;
@@ -101,7 +102,7 @@
             // 
             // BTPares
             // 
-            this.BTPares.Location = new System.Drawing.Point(269, 137);
+            this.BTPares.Location = new System.Drawing.Point(123, 249);
             this.BTPares.Name = "BTPares";
             this.BTPares.Size = new System.Drawing.Size(103, 23);
             this.BTPares.TabIndex = 45;
@@ -111,7 +112,7 @@
             // 
             // BTImpares
             // 
-            this.BTImpares.Location = new System.Drawing.Point(269, 193);
+            this.BTImpares.Location = new System.Drawing.Point(123, 299);
             this.BTImpares.Name = "BTImpares";
             this.BTImpares.Size = new System.Drawing.Size(103, 23);
             this.BTImpares.TabIndex = 46;
@@ -119,11 +120,22 @@
             this.BTImpares.UseVisualStyleBackColor = true;
             this.BTImpares.Click += new System.EventHandler(this.BTImpares_Click);
             // 
+            // BTPrimos
+            // 
+            this.BTPrimos.Location = new System.Drawing.Point(123, 353);
+            this.BTPrimos.Name = "BTPrimos";
+            this.BTPrimos.Size = new System.Drawing.Size(103, 23);
+            this.BTPrimos.TabIndex = 47;
+            this.BTPrimos.Text = "Numeros Primos";
+            this.BTPrimos.UseVisualStyleBackColor = true;
+            this.BTPrimos.Click += new System.EventHandler(this.BTPrimos_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(700, 341);
+            this.ClientSize = new System.Drawing.Size(688, 403);
+            this.Controls.Add(this.BTPrimos);
             this.Controls.Add(this.BTImpares);
             this.Controls.Add(this.BTPares);
             this.Controls.Add(this.label1);
@@ -152,6 +164,7 @@
         private System.Windows.Forms.Button BTPares;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.Button BTImpares;
+        private System.Windows.Forms.Button BTPrimos;
     }
 }
 
