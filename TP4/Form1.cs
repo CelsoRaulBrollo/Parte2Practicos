@@ -8,19 +8,23 @@ using System.Security.Cryptography;
 using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.DataVisualization.Charting;
 using System.Windows.Forms;
 
 namespace TP4
 {
-    public partial class Form1 : Form
+    public partial class Formulario4 : Form
     {
         private Int16 desde;
         Int16 hasta;
 
-        public Form1()
+        string[] series = { "Pares", "Impares", "Primos", "Total" };
+        int[] puntos = { };
+
+        public Formulario4()
         {
             InitializeComponent();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
+            chart1.Titles.Add("Lista Números");
         }
 
         private void LBLista_SelectedIndexChanged(object sender, EventArgs e)
@@ -55,6 +59,7 @@ namespace TP4
             }
             else
             {
+                chart1.Series["Numeros"].Points.Clear();
                 LBLista.Items.Clear();
                 desde = Int16.Parse(TBDesde.Text);
                 hasta = Int16.Parse(TBHasta.Text);
@@ -71,6 +76,8 @@ namespace TP4
                     desde++;
                     total++;
                 }
+                chart1.Series["Numeros"].Points.AddXY("Pares", par);
+                chart1.Series["Numeros"].Points.AddXY("Total", total);
             }
         }
 
@@ -87,6 +94,7 @@ namespace TP4
             }
             else
             {
+                chart1.Series["Numeros"].Points.Clear();
                 LBLista.Items.Clear();
                 desde = Int16.Parse(TBDesde.Text);
                 hasta = Int16.Parse(TBHasta.Text);
@@ -102,6 +110,8 @@ namespace TP4
                     desde++;
                     total++;
                 }
+                chart1.Series["Numeros"].Points.AddXY("Impares", impar);
+                chart1.Series["Numeros"].Points.AddXY("Total", total);
             }
         }
 
@@ -118,6 +128,7 @@ namespace TP4
             }
             else
             {
+                chart1.Series["Numeros"].Points.Clear();
                 LBLista.Items.Clear();
                 desde = Int16.Parse(TBDesde.Text);
                 hasta = Int16.Parse(TBHasta.Text);
@@ -133,6 +144,8 @@ namespace TP4
                     desde++;
                     total++;
                 }
+                chart1.Series["Numeros"].Points.AddXY("Primos", primos);
+                chart1.Series["Numeros"].Points.AddXY("Total", total);
             }
         }
 
@@ -151,6 +164,11 @@ namespace TP4
                 }
             }
             return true;
+        }
+
+        private void chart1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
