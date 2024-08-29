@@ -35,6 +35,7 @@
             this.TBDesde = new System.Windows.Forms.TextBox();
             this.LHasta = new System.Windows.Forms.Label();
             this.LDesde = new System.Windows.Forms.Label();
+            this.BTPares = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -97,11 +98,22 @@
             this.LDesde.TabIndex = 35;
             this.LDesde.Text = "Desde";
             // 
+            // BTPares
+            // 
+            this.BTPares.Location = new System.Drawing.Point(269, 137);
+            this.BTPares.Name = "BTPares";
+            this.BTPares.Size = new System.Drawing.Size(103, 23);
+            this.BTPares.TabIndex = 45;
+            this.BTPares.Text = "Numeros Pares";
+            this.BTPares.UseVisualStyleBackColor = true;
+            this.BTPares.Click += new System.EventHandler(this.BTPares_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(700, 341);
+            this.Controls.Add(this.BTPares);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BFuncion);
             this.Controls.Add(this.LBLista);
@@ -125,6 +137,8 @@
         private System.Windows.Forms.TextBox TBDesde;
         private System.Windows.Forms.Label LHasta;
         private System.Windows.Forms.Label LDesde;
+        private System.Windows.Forms.Button BTPares;
+        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
     }
 }
 
