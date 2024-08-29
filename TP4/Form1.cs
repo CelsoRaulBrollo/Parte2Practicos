@@ -78,5 +78,36 @@ namespace TP4
         {
             return (n % 2 == 0);
         }
+
+        private void BTImpares_Click(object sender, EventArgs e)
+        {
+            if (LBLista.Items.Count == 0)
+            {
+                MessageBox.Show("Lista de números vacia!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            else
+            {
+                LBLista.Items.Clear();
+                desde = Int16.Parse(TBDesde.Text);
+                hasta = Int16.Parse(TBHasta.Text);
+                int total = 0;
+                int impar = 0;
+                while (desde <= hasta)
+                {
+                    if (esImpar(desde))
+                    {
+                        LBLista.Items.Add(desde);
+                        impar++;
+                    }
+                    desde++;
+                    total++;
+                }
+            }
+        }
+
+        public bool esImpar(Int16 n)
+        {
+            return (n % 2 != 0);
+        }
     }
 }

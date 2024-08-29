@@ -36,6 +36,7 @@
             this.LHasta = new System.Windows.Forms.Label();
             this.LDesde = new System.Windows.Forms.Label();
             this.BTPares = new System.Windows.Forms.Button();
+            this.BTImpares = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -108,11 +109,22 @@
             this.BTPares.UseVisualStyleBackColor = true;
             this.BTPares.Click += new System.EventHandler(this.BTPares_Click);
             // 
+            // BTImpares
+            // 
+            this.BTImpares.Location = new System.Drawing.Point(269, 193);
+            this.BTImpares.Name = "BTImpares";
+            this.BTImpares.Size = new System.Drawing.Size(103, 23);
+            this.BTImpares.TabIndex = 46;
+            this.BTImpares.Text = "Numeros Impares";
+            this.BTImpares.UseVisualStyleBackColor = true;
+            this.BTImpares.Click += new System.EventHandler(this.BTImpares_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(700, 341);
+            this.Controls.Add(this.BTImpares);
             this.Controls.Add(this.BTPares);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.BFuncion);
@@ -139,6 +151,7 @@
         private System.Windows.Forms.Label LDesde;
         private System.Windows.Forms.Button BTPares;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
+        private System.Windows.Forms.Button BTImpares;
     }
 }
 
