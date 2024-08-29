@@ -97,63 +97,100 @@ namespace TP5
             if (string.IsNullOrEmpty(TBNombre.Text) || string.IsNullOrEmpty(TBApellido.Text) || string.IsNullOrEmpty(TBSaldo.Text) || string.IsNullOrEmpty(TBFoto.Text))
             {
                 MessageBox.Show("Debe completar todos los campos!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
             }
-            else
+
+            if (!EsTexto(TBNombre.Text) || !EsTexto(TBApellido.Text))
             {
-                DateTime fechaSeleccionada = dateTimePicker1.Value.Date;
+                MessageBox.Show("El nombre y apellido solo deben contener letras!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
-                DateTime fechaMinima = DateTime.Today.AddYears(-18);
-                if (fechaSeleccionada <= fechaMinima)
+            if (!decimal.TryParse(TBSaldo.Text, out decimal saldo))
+            {
+                MessageBox.Show("El saldo debe ser un número válido!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!File.Exists(TBFoto.Text) || !ImagenValida(TBFoto.Text))
+            {
+                MessageBox.Show("Debe seleccionar una imagen válida!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            DateTime fechaSeleccionada = dateTimePicker1.Value.Date;
+            DateTime fechaMinima = DateTime.Today.AddYears(-18);
+            if (fechaSeleccionada > fechaMinima)
+            {
+                MessageBox.Show("El usuario debe tener 18 años o más!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                return;
+            }
+
+            try
+            {
+                int n = dtgvCliente.Rows.Add();
+                TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
+
+                dtgvCliente.Rows[n].Cells[0].Value = textInfo.ToTitleCase(TBApellido.Text.ToLower());
+                dtgvCliente.Rows[n].Cells[1].Value = textInfo.ToTitleCase(TBNombre.Text.ToLower());
+                dtgvCliente.Rows[n].Cells[2].Value = dateTimePicker1.Text;
+                dtgvCliente.Rows[n].Cells[3].Value = RDBHombre.Checked ? "Hombre" : "Mujer";
+                dtgvCliente.Rows[n].Cells[4].Value = "Eliminar";
+                dtgvCliente.Rows[n].Cells[5].Value = saldo;
+
+                if (saldo < 50)
                 {
-                    int n = dtgvCliente.Rows.Add();
-                    TextInfo textInfo = CultureInfo.CurrentCulture.TextInfo;
-
-                    dtgvCliente.Rows[n].Cells[0].Value = textInfo.ToTitleCase(TBApellido.Text.ToLower());
-                    dtgvCliente.Rows[n].Cells[1].Value = textInfo.ToTitleCase(TBNombre.Text.ToLower());
-                    dtgvCliente.Rows[n].Cells[2].Value = dateTimePicker1.Text;
-
-                    if (RDBHombre.Checked) dtgvCliente.Rows[n].Cells[3].Value = "Hombre";
-                    else dtgvCliente.Rows[n].Cells[3].Value = "Mujer";
-
-                    dtgvCliente.Rows[n].Cells[4].Value = "Eliminar";
-
-                    if (Decimal.Parse(TBSaldo.Text) < 50) dtgvCliente.Rows[n].DefaultCellStyle.BackColor = Color.Red;
-                    dtgvCliente.Rows[n].Cells[5].Value = Decimal.Parse(TBSaldo.Text);
-
-                    try
-                    {
-                        string fotosPath = Path.Combine(ejecutablePath, "Fotos");
-
-                        if (!Directory.Exists(fotosPath))
-                        {
-                            Directory.CreateDirectory(fotosPath);
-                        }
-
-                        string sourceFilePath = TBFoto.Text;
-
-                        string fileName = Path.GetFileName(sourceFilePath);
-
-                        destinationFilePath = Path.Combine(fotosPath, TBApellido.Text + TBNombre.Text + n + fileName);
-
-                        File.Copy(sourceFilePath, destinationFilePath, true);
-
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Ocurrió un error al guardar la imagen: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    Image imagen = Image.FromFile(destinationFilePath);
-                    dtgvCliente.Rows[n].Cells[6].Value = imagen;
-
-                    dtgvCliente.Rows[n].Cells[7].Value = destinationFilePath;
-
-                    limpiar();
-                    destinationFilePath = null;
+                    dtgvCliente.Rows[n].DefaultCellStyle.BackColor = Color.Red;
                 }
-                else
+
+                string fotosPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Fotos");
+
+                if (!Directory.Exists(fotosPath))
                 {
-                    MessageBox.Show("El usuario debe tener 18 años o mas!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    Directory.CreateDirectory(fotosPath);
                 }
+
+                string fileName = Path.GetFileName(TBFoto.Text);
+                string destinationFilePath = Path.Combine(fotosPath, TBApellido.Text + TBNombre.Text + n + fileName);
+
+                File.Copy(TBFoto.Text, destinationFilePath, true);
+
+                Image imagen = Image.FromFile(destinationFilePath);
+                dtgvCliente.Rows[n].Cells[6].Value = imagen;
+                dtgvCliente.Rows[n].Cells[7].Value = destinationFilePath;
+
+                limpiar();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Ocurrió un error al guardar la imagen: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private bool EsTexto(string input)
+        {
+            foreach (char c in input)
+            {
+                if (!char.IsLetter(c) && c != ' ')
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private bool ImagenValida(string filePath)
+        {
+            try
+            {
+                using (var img = Image.FromFile(filePath))
+                {
+                    return true;
+                }
+            }
+            catch
+            {
+                return false;
             }
         }
 
